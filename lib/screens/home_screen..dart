@@ -47,12 +47,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     ListTile(
                       title: Center(child: Text(articles[index].author)),
                       subtitle: Text(articles[index].title),
+                      leading: CircleAvatar(
+                        child: Text('${index+ 1}'),
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          '${articles[index].publishedAt.toLocal().hour} : ${articles[index].publishedAt.toLocal().minute}',
+                          '${articles[index].getDate}',
                         ),
                         const SizedBox(width: 20.0,)
                       ],

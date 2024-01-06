@@ -1,4 +1,5 @@
 import 'article_source.dart';
+import 'package:intl/intl.dart';
 
 class Article{
   final String author;
@@ -31,6 +32,8 @@ class Article{
         publishedAt: DateTime.parse(json['publishedAt']),
     );
   }
-
+  get getDate {
+    return DateFormat('dd-MM-yy – HH:mm').format(publishedAt);
+  }
 }
 
