@@ -25,11 +25,12 @@ class Article{
         title: json['title'],
         description: json['description'] ?? "",
         url: json['url'],
-        urlToImage: json['urlToImage'] ?? "",
+        urlToImage: json['urlToImage'] ?? "https://3.bp.blogspot.com/-mF42jMQOXhc/V4w8yTYMrTI/AAAAAAAAfUQ/6a1ycwG6YvocB4x8kM3PRor74u5HMuN1ACKgB/s1600/placeholder-image.jpg",
         content: json['content'] ?? "",
         source: ArticleSource.fromMap(json['source']),
         publishedAt: DateTime.parse(json['publishedAt']),
     );
   }
+
 }
 

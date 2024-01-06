@@ -13,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   List<Article> articles = [];
+  bool isLoading = true;
   @override
   void initState() {
     super.initState();
@@ -34,26 +35,49 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         backgroundColor: Colors.blue,
       ),
-      body: ListView.builder(
-          itemCount: articles.length,
-          itemBuilder: (context, index){
-            return Card(
-              child: ListTile(
-                title: Text(articles[index].author),
-                leading: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(150.0)),
-                    child: Image.network(articles[index].urlToImage),
+      body: Visibility(
+        visible: isLoading,
+        replacement: ListView.builder(
+            itemCount: articles.length,
+            itemBuilder: (context, index){
+              return Card(
+                child: Column(
+                  children: [
+                    Image.network(articles[index].urlToImage),
+                    ListTile(
+                      title: Center(child: Text(articles[index].author)),
+                      subtitle: Text(articles[index].title),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          '${articles[index].publishedAt.toLocal().hour} : ${articles[index].publishedAt.toLocal().minute}',
+                        ),
+                        const SizedBox(width: 20.0,)
+                      ],
+                    ),
+                    const SizedBox(height: 20.0,)
+                  ],
                 ),
-                subtitle: Text(articles[index].title),
-              ),
-            );
-      }),
+              );
+            }),
+        child: const Center(child: CircularProgressIndicator()),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: fetchNews,
+        child: const Icon(Icons.refresh),
+      ),
     );
   }
   void fetchNews() async {
+    setState(() {
+      isLoading = true;
+    });
     final news = await NewsHeadlines.fetchNews();
     setState(() {
       articles = news;
+      isLoading = false;
     });
   }
 }
