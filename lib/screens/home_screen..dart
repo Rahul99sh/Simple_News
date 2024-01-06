@@ -17,10 +17,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _fetchNews();
+    _getNews();
   }
 
-  Future<void> _fetchNews() async {
+  Future<void> _getNews() async { // function to get news articles
     try {
       setState(() {
         isLoading = true;
@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Widget _buildArticleList() {
+  Widget _buildArticleList() { // returns either error msg or list or news articles
       if(isError){
         return const Center(child: Text('Error Loading the News!\nTry Again!'));
       }else {
@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: const Center(child: CircularProgressIndicator()),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _fetchNews,
+        onPressed: _getNews,
         child: const Icon(Icons.refresh),
       ),
     );

@@ -8,9 +8,9 @@ class NewsHeadlines {
   static const String _baseUrl =
       'https://newsapi.org/v2/top-headlines?country=in';
 
-  static Future<List<Article>> fetchNews() async {
+  static Future<List<Article>> fetchNews() async { // function to fetch news headlines from api
     try {
-      const url = '$_baseUrl&apiKey=$_apiKey';
+      const url = '$_baseUrl&apiKey=$_apiKey'; // API endpoint
       final response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {
