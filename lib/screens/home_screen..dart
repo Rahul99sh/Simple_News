@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:simple_news/services/NewsHeadlinesApi.dart';
+import 'package:simple_news/services/news_headlines_api.dart';
 
-import '../models/Article.dart';
+import '../models/article.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
